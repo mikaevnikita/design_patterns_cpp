@@ -2,6 +2,16 @@
 #include <string>
 using namespace std;
 
+/*
+Конечный автомат для чисел кратных четырем на основе паттерна Состояние
++Объектно-ориентированный подход в написании конечных автоматов
++Явно-выраженные переходы между состояниями, нежели при реализации через
+switch-case, или матрицу
++Делегирование запроса на состояние
+-Разрастается архитектура
+*/
+
+
 enum multiply_four_states {REST_0, REST_1, REST_2, REST_3, UNKNOWN};
 
 class StateMachine;
@@ -88,9 +98,8 @@ multiply_four_states StateMachine::getCurrentState() const{
     return state->state();
 }
 void StateMachine::setState(State* state){
-    State* tmp_state = this->state;
+    delete this->state;
     this->state = state;
-    delete tmp_state;
 }
 
 StateMachine::~StateMachine(){
